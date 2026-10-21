@@ -34,8 +34,9 @@
     const frag = document.createDocumentFragment();
     String(str).split(/(\*\*[^*]+\*\*|\*[^*]+\*)/).forEach((p) => {
       if (!p) return;
-      if (p.startsWith("**")) frag.appendChild(h("strong", { text: p.slice(2, -2) }));
-      else if (p.startsWith("*")) frag.appendChild(h("em", { text: p.slice(1, -1) }));
+      // short highlighted bits (suffixes like **-ful**) must not break across lines
+      if (p.startsWith("**")) frag.appendChild(h("strong", { class: p.length <= 18 ? "nb" : null, text: p.slice(2, -2) }));
+      else if (p.startsWith("*")) frag.appendChild(h("em", { class: p.length <= 16 ? "nb" : null, text: p.slice(1, -1) }));
       else frag.appendChild(document.createTextNode(p));
     });
     return frag;
@@ -250,7 +251,7 @@
         finish(ok, note, chosen.t);
       }));
       onDigit = (i) => { if (!done && buttons[i]) buttons[i].click(); };
-      interaction = h("div", { class: "options" + (short ? " short" : ""), role: "group", "aria-label": "Answer options" }, buttons);
+      interaction = h("div", { class: "options" + (short ? " short" : "") + (short && opts.length === 4 ? " four" : ""), role: "group", "aria-label": "Answer options" }, buttons);
     }
 
     show(
@@ -316,6 +317,7 @@
         h("h2", { text: c.name }),
         h("p", { text: T.title }),
         h("dl", null,
+          T.class ? [h("dt", { text: "Class" }), h("dd", { text: T.class })] : null,
           h("dt", { text: "Score" }), h("dd", { text: score + " out of " + total }),
           h("dt", { text: "Date" }), h("dd", { text: niceDate(c.date) }),
           h("dt", { text: "Code" }), h("dd", { class: "code", text: c.code }))),

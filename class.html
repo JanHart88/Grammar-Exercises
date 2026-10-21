@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grammar practice: exercises</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="shared/style.css">
+</head>
+<body>
+  <a class="skip" href="#app">Skip to the exercises</a>
+  <header class="top">
+    <a href="index.html">All classes</a>
+    <span class="brand">Grammar practice</span>
+  </header>
+  <main id="app" tabindex="-1">
+    <h1 id="heading">Exercises</h1>
+    <p class="lede" id="lede"></p>
+    <ul class="topic-list" id="topics"></ul>
+    <noscript><p>These exercises need JavaScript. Please turn it on in your browser.</p></noscript>
+  </main>
+  <footer>Nothing you type here is stored or sent anywhere.</footer>
+  <script src="topics.js"></script>
+  <script src="shared/hub.js"></script>
+  <script>
+    (function () {
+      var hub = window.PracticeHub;
+      var cls = hub.currentClass();
+      var heading = document.getElementById("heading");
+      var lede = document.getElementById("lede");
+      var list = document.getElementById("topics");
+      if (!cls) {
+        heading.textContent = "Class not found";
+        lede.textContent = "This link does not match a class. Go back and pick your class from the list.";
+        return;
+      }
+      document.title = cls.title + ": grammar practice";
+      heading.textContent = cls.title;
+      hub.renderTopics(list, cls.id);
+      lede.textContent = list.children.length
+        ? "Pick an exercise. After every answer you get a short explanation, so you learn from your mistakes."
+        : "There are no exercises for this class yet.";
+    })();
+  </script>
+</body>
+</html>

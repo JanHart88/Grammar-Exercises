@@ -87,7 +87,7 @@ body {
   font-size: .95rem;
 }
 .top a { color: var(--link); font-weight: 600; text-underline-offset: 3px; }
-.top .brand { color: var(--muted); }
+.top .brand, .top a.brand { color: var(--muted); font-weight: 400; }
 
 main {
   width: 100%; max-width: 44rem; margin: 0 auto;
@@ -106,6 +106,7 @@ h2 { font-size: clamp(1.6rem, 5vw, 2.1rem); }
 h3 { font-size: 1.15rem; letter-spacing: -.01em; }
 h1:focus, h2:focus, .instruction:focus { outline: none; }
 p { margin: 0 0 .9rem; }
+.nb { white-space: nowrap; }
 
 :focus-visible { outline: 3px solid var(--link); outline-offset: 3px; border-radius: 6px; }
 
@@ -166,6 +167,9 @@ p { margin: 0 0 .9rem; }
 
 .options { display: grid; gap: .65rem; max-width: 36rem; }
 .options.short { grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); }
+@media (min-width: 30rem) {
+  .options.four { grid-template-columns: repeat(2, 1fr); }
+}
 .opt {
   position: relative; display: flex; align-items: center; gap: .8rem;
   width: 100%; min-height: 3.3rem; padding: .7rem 3rem .7rem .9rem;

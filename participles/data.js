@@ -12,6 +12,7 @@
 */
 window.TOPIC = {
   id: "participles",
+  class: "6A",
   title: "Participles: practice",
   intro: [
     "This practice goes with the handout *Participles – Step by Step*. It has six short parts. After every answer you get a short explanation.",

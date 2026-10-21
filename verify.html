@@ -30,7 +30,7 @@
     (function () {
       var Code = window.PracticeCode;
       var titles = {};
-      (window.TOPICS || []).forEach(function (t) { titles[t.id] = t.title; });
+      (window.TOPICS || []).forEach(function (t) { titles[t.id] = t.title + " (" + t.class + ")"; });
 
       function cell(text, cls) {
         var td = document.createElement("td");
