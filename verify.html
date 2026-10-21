@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Check completion codes</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="shared/style.css">
+</head>
+<body>
+  <a class="skip" href="#app">Skip to the checker</a>
+  <header class="top">
+    <a href="index.html">All exercises</a>
+    <span class="brand">For teachers</span>
+  </header>
+  <main id="app" tabindex="-1">
+    <h1>Check completion codes</h1>
+    <p class="lede">Paste the lines your students sent you, one per line. The page checks that name, score and date match the code.</p>
+    <label for="paste"><strong>Student lines</strong></label>
+    <textarea class="paste" id="paste" spellcheck="false" placeholder="Anna Muster | participles | 41/49 | 2026-10-22 | ABCD-EFGH"></textarea>
+    <div class="actions"><button type="button" class="btn" id="go">Check</button></div>
+    <div id="out" role="status"></div>
+    <p class="fine">The code is a light check against casual changes, for example editing a screenshot. It is not secure: anyone who reads the page source could work out how it is made.</p>
+  </main>
+  <footer>This page runs in your browser. Nothing you paste is sent anywhere.</footer>
+  <script src="topics.js"></script>
+  <script src="shared/code.js"></script>
+  <script>
+    (function () {
+      var Code = window.PracticeCode;
+      var titles = {};
+      (window.TOPICS || []).forEach(function (t) { titles[t.id] = t.title; });
+
+      function cell(text, cls) {
+        var td = document.createElement("td");
+        td.textContent = text;
+        if (cls) td.className = cls;
+        return td;
+      }
+
+      document.getElementById("go").addEventListener("click", function () {
+        var out = document.getElementById("out");
+        out.textContent = "";
+        var lines = document.getElementById("paste").value.split(/\r?\n/).filter(function (l) { return l.trim(); });
+        if (!lines.length) { out.textContent = "Paste at least one line first."; return; }
+
+        var table = document.createElement("table");
+        table.className = "results";
+        var head = document.createElement("tr");
+        ["Name", "Exercise", "Score", "Date", "Check"].forEach(function (t) {
+          var th = document.createElement("th");
+          th.textContent = t;
+          head.appendChild(th);
+        });
+        table.appendChild(head);
+
+        lines.forEach(function (l) {
+          var tr = document.createElement("tr");
+          var p = Code.parse(l);
+          if (!p) {
+            tr.appendChild(cell(l));
+            var td = cell("Could not read this line (expected: name | exercise | score | date | code)", "status-no");
+            td.colSpan = 4;
+            tr.appendChild(td);
+          } else {
+            var ok = Code.check(p);
+            tr.appendChild(cell(p.name));
+            tr.appendChild(cell(titles[p.topic] || p.topic));
+            tr.appendChild(cell(p.score + " of " + p.total));
+            tr.appendChild(cell(p.date.split("-").reverse().join(".")));
+            tr.appendChild(cell(ok ? "✓ Code matches" : "✗ Does not match", ok ? "status-ok" : "status-no"));
+          }
+          table.appendChild(tr);
+        });
+        out.appendChild(table);
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grammar practice</title>
+  <meta name="description" content="Short interactive grammar exercises with instant explanations.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="shared/style.css">
+</head>
+<body>
+  <a class="skip" href="#app">Skip to the exercises</a>
+  <header class="top">
+    <span class="brand">Grammar practice</span>
+  </header>
+  <main id="app" tabindex="-1">
+    <h1>Pick an exercise</h1>
+    <p class="lede">Short grammar exercises. After every answer you get a short explanation, so you learn from your mistakes.</p>
+    <ul class="topic-list" id="topics"></ul>
+    <noscript><p>These exercises need JavaScript. Please turn it on in your browser.</p></noscript>
+  </main>
+  <footer>Nothing you type here is stored or sent anywhere.</footer>
+  <script src="topics.js"></script>
+  <script>
+    (function () {
+      var list = document.getElementById("topics");
+      (window.TOPICS || []).forEach(function (t) {
+        var li = document.createElement("li");
+        var a = document.createElement("a");
+        a.href = t.path;
+        var title = document.createElement("span");
+        title.className = "topic-title";
+        title.textContent = t.title;
+        var desc = document.createElement("p");
+        desc.className = "topic-desc";
+        desc.textContent = t.desc;
+        var meta = document.createElement("p");
+        meta.className = "topic-meta";
+        meta.textContent = t.level + ", " + t.time;
+        a.appendChild(title);
+        a.appendChild(desc);
+        a.appendChild(meta);
+        li.appendChild(a);
+        list.appendChild(li);
+      });
+    })();
+  </script>
+</body>
+</html>
