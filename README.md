@@ -32,15 +32,16 @@ participles/          one exercise (class 6A)
   index.html          tiny page that loads the engine
   data.js             all questions and explanations
 7a-word-formation-1/  another exercise (class 7A)
+1has-word-order-1/    another exercise (class 1.HAS)
 ```
 
 ## Add a class
 
-Add one line to `CLASSES` in `topics.js`, for example `{ id: "8A", title: "Class 8A" }`. The hub and the class page pick it up automatically. No new files are needed.
+Add one line to `CLASSES` in `topics.js`, for example `{ id: "4A", title: "Class 4A" }` (an id such as `1.HAS` works too). The hub and the class page pick it up automatically. No new files are needed. Classes without exercises are listed as "No exercises yet", and their class link already works.
 
 ## Add an exercise
 
-1. Copy an exercise folder and rename it. Starting the name with the class helps, for example `7a-conditionals-1/`.
+1. Copy an exercise folder and rename it. Starting the name with the class helps, for example `7a-conditionals-1/` or `1has-greetings/`.
 2. In the new folder's `data.js`, change `id`, `class`, `title`, the intro and the parts. The format is explained at the top of `participles/data.js`.
 3. In the new folder's `index.html`, change the `<title>` and the link in the header (`class.html?c=7A` and `Class 7A`).
 4. Add an entry to `TOPICS` in `topics.js` (`id` and `class` must match `data.js`).

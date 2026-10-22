@@ -36,7 +36,8 @@
 
     renderClasses: function (list) {
       (window.CLASSES || []).forEach(function (c) {
-        list.appendChild(row(window.PracticeHub.classHref(c.id), c.title, "", plural(topicsOf(c.id).length, "exercise")));
+        var n = topicsOf(c.id).length;
+        list.appendChild(row(window.PracticeHub.classHref(c.id), c.title, "", n ? plural(n, "exercise") : "No exercises yet"));
       });
     },
 

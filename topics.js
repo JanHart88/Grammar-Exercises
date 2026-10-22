@@ -4,8 +4,13 @@
    To add an exercise: copy an existing exercise folder, edit its data.js (id, class, questions),
    then add an entry below. `id` and `class` must match the ones in the exercise's data.js. */
 window.CLASSES = [
+  { id: "5A", title: "Class 5A" },
   { id: "6A", title: "Class 6A" },
-  { id: "7A", title: "Class 7A" }
+  { id: "7A", title: "Class 7A" },
+  { id: "8A", title: "Class 8A" },
+  { id: "1.HAS", title: "Class 1.HAS" },
+  { id: "2.HAS", title: "Class 2.HAS" },
+  { id: "3.HAS", title: "Class 3.HAS" }
 ];
 
 window.TOPICS = [
@@ -24,5 +29,13 @@ window.TOPICS = [
     desc: "Forming words with suffixes: word classes, spelling, and noun or adjective. Goes with the Spot on language section.",
     path: "7a-word-formation-1/",
     time: "about 15 minutes"
+  },
+  {
+    id: "1has-word-order-1",
+    class: "1.HAS",
+    title: "Word Order: Place and Time",
+    desc: "Where do place and time go in an English sentence? Short sentences with easy words.",
+    path: "1has-word-order-1/",
+    time: "about 10 minutes"
   }
 ];
